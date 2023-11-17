@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CalculController extends AbstractController
 {
     #[Route('/calcul/{op}', name: 'app_calcul')]
-    public function index(string $op = " ", Request $request): Response
+    public function index(string $op, Request $request): Response
     {
         $var1 = $request->query->get('var1');
         $var2 = $request->query->get('var2');
@@ -33,13 +33,16 @@ class CalculController extends AbstractController
                 break;
 
             case 'div':
-                if ($var1 == 0 || $var2 == 0) {
+                if ( $var2 == 0) {
                     $message = "Infinity";
                 } else {
                     $result = $var1 / $var2;
                     $message = "$var1 / $var2 = $result";
                 }
                 break;
+
+            case " ":
+                $message = "Erreur ";
 
             default:
                 $message = "Erreur ";
